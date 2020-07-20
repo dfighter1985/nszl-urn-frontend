@@ -36,10 +36,10 @@ SOFTWARE.
                             </button>
                             <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav mr-auto">
-                                            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="/resolve">Resolve</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="/delete">Delete</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="<c:url value="/" />">Home</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="<c:url value="/resolve" />">Resolve</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="<c:url value="/register" />">Register</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="<c:url value="/delete" />">Delete</a></li>
                                     </ul>
                             </div>
                     </nav>
@@ -47,7 +47,7 @@ SOFTWARE.
                 
                     Enter the URN you'd like to resolve
 
-                    <form action="/resolve" method="GET">
+                    <form action="<c:url value="/resolve" />" method="GET">
                         <input type="text" name="urnid" value="${urn}"/><br/>
                         <input type="checkbox" name="redirect"/>&nbsp;Redirect<br/>
                         <input type="submit" value="Resolve!"/>
