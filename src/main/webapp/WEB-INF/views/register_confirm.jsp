@@ -55,8 +55,11 @@ SOFTWARE.
                     <spring:message code="register.change_document" />
 
                     <form action="<c:url value="/register" />" method="GET">
+                        URN<br/>
                         <input type="text" name="urn" value="${URN}"/><br/>
+                        URL<br/>
 			<input type="text" name="url" value="${URL}"/><br/>
+                        TID<br/>
 			<input type="text" name="tid" value="${TID}"/><br/>
                         <input type="submit" value="<spring:message code="register.confirm" />"/>
                     </form>
