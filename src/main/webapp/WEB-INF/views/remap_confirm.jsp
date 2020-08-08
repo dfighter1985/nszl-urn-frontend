@@ -46,24 +46,22 @@ SOFTWARE.
                     </nav>
             
                 
-                    Enter the URN you'd like to resolve
+                    Remove the URN from the document, add to the other, and then click to confirm!
 
-                    <form action="<c:url value="/resolve" />" method="GET">
-                        <input type="text" name="urnid" value="${urn}"/><br/>
-                        <input type="checkbox" name="redirect"/>&nbsp;Redirect<br/>
-                        <input type="submit" value="Resolve!"/>
+                    <form action="<c:url value="/remap" />" method="GET">
+                        URN<br/>
+                        <input type="text" name="urn" value="${urn}"/><br/>
+                        Old URL<br/>
+                        <input type="text" name="oldurl" value="${oldurl}"/><br/>
+                        New URL<br/>
+                        <input type="text" name="newurl" value="${newurl}"/><br/>
+                        TID<br/>
+                        <input type="text" name="tid" value="${tid}"/><br/>
+                        <input type="submit" value="Confirm!"/>
                     </form>
                     
-                    <c:if test="${urls.size() > 0}">
-                        <table class="table table-bordered">
-                            <thead><tr><th>Urls that are registered to ${urn}</th></tr></thead>
-                        <c:forEach var="url" items="${urls}">
-                            <tr><td><a href="${url}">${url}</a></td></tr>
-                        </c:forEach>
-                        </table>
-                    </c:if>
-
                     <H1 class="text-danger">${Error}</H1>
+                    <H1 class="text-success">${Message}</H1>
                 </div>
                 
                 <script src="<c:url value="/js/jquery-3.2.1.slim.min.js" />"></script>

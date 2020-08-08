@@ -313,4 +313,124 @@ public class SiteController
         final ModelAndView mv = new ModelAndView( "delete" );
         return mv;
     }
+    
+    
+    private ModelAndView remapUrn(
+            final String urn,
+            final String oldurl,
+            final String newurl )
+    {
+        ResolverResponse response = null;
+        
+        final ModelAndView mv = new ModelAndView();
+        mv.addObject( "urn", urn );
+        mv.addObject( "oldurl", oldurl );
+        mv.addObject( "newurl", newurl );
+        
+        try
+        {
+            response = client.startModifyURL( urn, oldurl, newurl );
+        }
+        catch( final MalformedURLException mue )
+        {
+            LOG.error( "", mue );
+        }
+        catch( final IOException ioe )
+        {
+            LOG.error( "", ioe );
+        }
+        
+        if( response == null )
+        {
+            mv.setViewName( "remap" );
+            mv.addObject( "Error", "Error remapping" );
+        }
+        else
+        {
+            if( response.statusCode != 0 )
+            {
+                mv.setViewName( "remap" );
+                mv.addObject( "Error", "Error remapping: " + response.message );
+            }
+            else
+            {
+                mv.setViewName( "remap_confirm" );
+                mv.addObject( "tid", response.tid );
+            }
+        }
+        
+        return mv;
+    }
+    
+    private ModelAndView confirmRemap( final String urn,
+            final String oldurl,
+            final String newurl,
+            final String tid )
+    {
+        final ModelAndView mv = new ModelAndView( "remap_confirm" );
+        mv.addObject( "urn", urn);
+        mv.addObject( "oldurl", oldurl );
+        mv.addObject( "newurl", newurl );
+        mv.addObject( "tid", tid);
+        
+        ResolverResponse response = null;
+        
+        try
+        {
+            response = client.confirmModifyUrl(urn, oldurl, newurl, tid );
+        }
+        catch( final MalformedURLException mue )
+        {
+            LOG.error( "", mue );
+        }
+        catch( final IOException ioe )
+        {
+            LOG.error( "", ioe );
+        }
+        
+        if( response == null )
+        {
+            mv.addObject( "Error", "Error confirming" );
+        }
+        else
+        {
+            if( response.statusCode != 0 )
+            {
+                mv.addObject( "Error", "Error confirming remap: " + response.message );
+            }
+            else
+            {
+                mv.addObject( "Message", "Remap successful!" );
+            }
+        }
+        
+        return mv;
+    }
+    
+    @RequestMapping(value = "/remap", method = RequestMethod.GET)
+    public ModelAndView showRemap(
+            @RequestParam(required = false) final String urn,
+            @RequestParam(required = false) final String oldurl,
+            @RequestParam(required = false) final String newurl,
+            @RequestParam(required = false) final String tid
+    )
+    {
+        if( urn != null && !urn.isEmpty() &&
+            oldurl != null && !oldurl.isEmpty() &&
+            newurl != null && !newurl.isEmpty() )
+        {
+            if( tid != null && !tid.isEmpty() )
+            {
+                return confirmRemap( urn, oldurl, newurl, tid );
+            }
+            else
+            {
+                return remapUrn( urn, oldurl, newurl );
+            }
+        }
+        
+        final ModelAndView mv = new ModelAndView();
+        mv.setViewName( "remap" );
+        return mv;
+    }
 }

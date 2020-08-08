@@ -40,6 +40,7 @@ SOFTWARE.
                                             <li class="nav-item"><a class="nav-link" href="<c:url value="/resolve" />">Resolve</a></li>
                                             <li class="nav-item"><a class="nav-link" href="<c:url value="/register" />">Register</a></li>
                                             <li class="nav-item"><a class="nav-link" href="<c:url value="/delete" />">Delete</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="<c:url value="/remap" />">Remap</a></li>
                                     </ul>
                             </div>
                     </nav>
