@@ -91,7 +91,7 @@ public class SiteController
         {
             LOG.error( "Failed to resolve URN: " + urn, rte );
             mv = new ModelAndView( "resolve" );
-            mv.addObject( "Error", "Error resolving URN" );
+            mv.addObject( "Error", "resolve.error" );
         }
         
         return mv;

@@ -19,6 +19,7 @@ SOFTWARE.
 -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!doctype html>
 <html>
@@ -69,7 +70,9 @@ SOFTWARE.
                         </table>
                     </c:if>
 
-                    <H1 class="text-danger">${Error}</H1>
+                    <c:if test="${ fn:length( Error ) > 0 }" >
+                        <H1 class="text-danger"><spring:message code="${Error}" /></H1>
+                    </c:if>
                 </div>
                 
                 <script src="<c:url value="/js/jquery-3.2.1.slim.min.js" />"></script>
