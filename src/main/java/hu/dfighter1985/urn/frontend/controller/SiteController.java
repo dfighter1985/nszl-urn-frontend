@@ -131,14 +131,14 @@ public class SiteController
         if( response == null )
         {
             final ModelAndView mv = new ModelAndView( "register" );
-            mv.addObject( "Error", "Error registering URN" );
+            mv.addObject( "Error", "register.error" );
             return mv;
         }
         
         if( response.statusCode != 0 )
         {
             final ModelAndView mv = new ModelAndView( "register" );
-            mv.addObject( "Error", "Error registering URN: " + response.message );
+            mv.addObject( "Error", ResolverErrorTranslator.translate( response.message ) );
             return mv;
         }
         
@@ -167,21 +167,21 @@ public class SiteController
         }
         
         final ModelAndView mv = new ModelAndView( "register_confirm" );
+        mv.addObject( "URN", urn );
+        mv.addObject( "URL", url );
+        mv.addObject( "TID", tid );
         
         if( response == null )
         {
-            mv.addObject( "Error", "Error registering URN" );
+            mv.addObject( "Error", "register.error" );
         }
         else
         if( response.statusCode != 0 )
         {
-            mv.addObject( "Error", "Error registering URN: " + response.message );
+            mv.addObject( "Error", ResolverErrorTranslator.translate( response.message ) );
         }
         else
         {
-            mv.addObject( "URN", urn );
-            mv.addObject( "URL", url );
-            mv.addObject( "TID", tid );
             mv.addObject( "Message", "URN successfully registered." );
         }
         

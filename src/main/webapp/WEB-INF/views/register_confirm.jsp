@@ -20,6 +20,7 @@ SOFTWARE.
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!doctype html>
 <html>
 	<head>
@@ -64,8 +65,11 @@ SOFTWARE.
                         <input type="submit" value="<spring:message code="register.confirm" />"/>
                     </form>
                     
-                    <H1 class="text-danger">${Error}</H1>
                     <H1 class="text-success">${Message}</H1>
+                    
+                    <c:if test="${ fn:length( Error ) > 0 }" >
+                        <H1 class="text-danger"><spring:message code="${Error}" /></H1>
+                    </c:if>
                 </div>
                 
                 <script src="<c:url value="/js/jquery-3.2.1.slim.min.js" />"></script>
