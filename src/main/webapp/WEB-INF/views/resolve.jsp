@@ -19,6 +19,7 @@ SOFTWARE.
 -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!doctype html>
 <html>
 	<head>
@@ -26,32 +27,37 @@ SOFTWARE.
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                 <link rel="stylesheet" href="<c:url value="/css/bootstrap-4.0.0.min.css" />">
 		
-		<title>URN resolver service</title>
+		<title><spring:message code="site.title" /></title>
 	</head>
 	<body>
                 <div class="container">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarNav">
-                                    <ul class="navbar-nav mr-auto">
-                                            <li class="nav-item"><a class="nav-link" href="<c:url value="/" />">Home</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="<c:url value="/resolve" />">Resolve</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="<c:url value="/register" />">Register</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="<c:url value="/delete" />">Delete</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="<c:url value="/remap" />">Remap</a></li>
-                                    </ul>
-                            </div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+                                    <li class="nav-item"><a class="nav-link" href="<c:url value="/" />"><spring:message code="nav.home" /></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<c:url value="/resolve" />"><spring:message code="nav.resolve" /></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<c:url value="/register" />"><spring:message code="nav.register" /></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<c:url value="/delete" />"><spring:message code="nav.delete" /></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<c:url value="/remap" />"><spring:message code="nav.remap" /></a></li>
+				</ul>
+                                
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item"><a class="nav-link" href="?lang=hu"><spring:message code="nav.hungarian" /></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="?lang=en"><spring:message code="nav.english" /></a></li>
+                                </ul>                                
+			</div>
                     </nav>
             
                 
-                    Enter the URN you'd like to resolve
+                    <spring:message code="resolve.enter_urn" />
 
                     <form action="<c:url value="/resolve" />" method="GET">
                         <input type="text" name="urnid" value="${urn}"/><br/>
-                        <input type="checkbox" name="redirect"/>&nbsp;Redirect<br/>
-                        <input type="submit" value="Resolve!"/>
+                        <input type="checkbox" name="redirect"/>&nbsp;<spring:message code="resolve.redirect" /><br/>
+                        <input type="submit" value="<spring:message code="resolve.resolve" />"/>
                     </form>
                     
                     <c:if test="${urls.size() > 0}">
