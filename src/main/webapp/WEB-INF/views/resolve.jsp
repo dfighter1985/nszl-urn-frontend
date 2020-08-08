@@ -62,7 +62,7 @@ SOFTWARE.
                     
                     <c:if test="${urls.size() > 0}">
                         <table class="table table-bordered">
-                            <thead><tr><th>Urls that are registered to ${urn}</th></tr></thead>
+                            <thead><tr><th><spring:message code="resolve.list" /></th></tr></thead>
                         <c:forEach var="url" items="${urls}">
                             <tr><td><a href="${url}">${url}</a></td></tr>
                         </c:forEach>
