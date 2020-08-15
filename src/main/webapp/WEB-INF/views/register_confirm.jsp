@@ -40,6 +40,7 @@ SOFTWARE.
 				<ul class="navbar-nav">
                                     <li class="nav-item"><a class="nav-link" href="<c:url value="/" />"><spring:message code="nav.home" /></a></li>
                                     <li class="nav-item"><a class="nav-link" href="<c:url value="/resolve" />"><spring:message code="nav.resolve" /></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<c:url value="/reverse-resolve" />"><spring:message code="nav.reverse-resolve" /></a></li>
                                     <li class="nav-item"><a class="nav-link" href="<c:url value="/register" />"><spring:message code="nav.register" /></a></li>
                                     <li class="nav-item"><a class="nav-link" href="<c:url value="/delete" />"><spring:message code="nav.delete" /></a></li>
                                     <li class="nav-item"><a class="nav-link" href="<c:url value="/remap" />"><spring:message code="nav.remap" /></a></li>

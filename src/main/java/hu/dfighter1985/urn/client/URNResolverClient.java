@@ -21,6 +21,7 @@ SOFTWARE.
 package hu.dfighter1985.urn.client;
 
 import hu.dfighter1985.urn.client.model.URNResolverResponse;
+import hu.dfighter1985.urn.client.model.URNReverseResolverResponse;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,6 +54,19 @@ public class URNResolverClient
                 .path( "/urns/" + urn )
                 .request( MediaType.APPLICATION_XML )
                 .get( URNResolverResponse.class );
+        
+        return response;
+    }
+    
+    public URNReverseResolverResponse reverseResolveUrn( final String url )
+    {
+        final Client client = ClientBuilder.newClient();
+        final URNReverseResolverResponse response = client
+                .target( endpoint )
+                .path( "/urnbyurl" )
+                .queryParam( "url", url )
+                .request( MediaType.APPLICATION_XML )
+                .get( URNReverseResolverResponse.class );
         
         return response;
     }

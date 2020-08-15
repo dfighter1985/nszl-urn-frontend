@@ -23,6 +23,7 @@ package hu.dfighter1985.urn.frontend.controller;
 import hu.dfighter1985.urn.client.ResolverResponse;
 import hu.dfighter1985.urn.client.URNResolverClient;
 import hu.dfighter1985.urn.client.model.URNResolverResponse;
+import hu.dfighter1985.urn.client.model.URNReverseResolverResponse;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -109,6 +110,44 @@ public class SiteController
         
         final ModelAndView mv = resolveUrn( urnid, redirect );
         return mv;
+    }
+    
+    public ModelAndView resolveUrl( final String url )
+    {
+        final ModelAndView mv = new ModelAndView( "reverse-resolve" );
+        
+        try
+        {
+            final URNReverseResolverResponse response = client.reverseResolveUrn( url );
+            mv.addObject( "URN", response.urn );
+        }
+        catch( final RuntimeException rte )
+        {
+            if( rte.getMessage().contains( "HTTP 404") )
+            {
+                mv.addObject( "Error", "reverse-resolve.notfound" );
+            }
+            else
+            {
+                LOG.error( "", rte );
+                mv.addObject( "Error", "reverse-resolve.error" );
+            }
+        }
+        
+        return mv;
+    }
+    
+    @RequestMapping(value = "reverse-resolve", method = RequestMethod.GET )
+    public ModelAndView showReverseResolve( @RequestParam(required = false) String url )
+    {
+        if( url == null || url.isEmpty() )
+        {
+            return new ModelAndView( "reverse-resolve" );
+        }
+        else
+        {
+            return resolveUrl( url );
+        }
     }
     
     private ModelAndView registerUrn( final String url )
