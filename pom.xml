@@ -37,7 +37,7 @@ SOFTWARE.
 	</properties>
 	
 	<build>
-		<finalName>urn-frontend</finalName>		
+		<finalName>frontend</finalName>		
 		<plugins>		
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
