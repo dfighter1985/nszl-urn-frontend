@@ -25,6 +25,6 @@ SOFTWARE.
 	   xmlns:mvc="http://www.springframework.org/schema/mvc">
     
     <bean class="hu.dfighter1985.urn.client.URNResolverClient">
-        <constructor-arg index="0" value="https://urn-teszt.oszk.hu/resolver-rest" />
+        <constructor-arg index="0" value="https://nbn.urn.hu/resolver-rest" />
     </bean>
 </beans>
